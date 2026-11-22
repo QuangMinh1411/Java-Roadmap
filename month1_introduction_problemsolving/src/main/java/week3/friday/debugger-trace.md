@@ -1,0 +1,37 @@
+# Bằng chứng debugger
+
+Thu ngày 2026-11-11 bằng IntelliJ IDEA debugger. Session 378 kết thúc với exit code 0. Session 392 được Stop ngay sau lần dừng thứ ba; không chờ chương trình treo. Các logpoint và breakpoint của bài đã được gỡ sau khi thu trace.
+
+## Logpoint trước/sau — session 378
+
+```text
+{"status":"stopped","sessionId":"378","message":"The session is already stopped.","exitCode":0,"breakpointErrorsTail":[],"tracepointOutputsTail":[{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158863,"timestampIso":"2026-11-11T06:55:58.863Z","sessionId":"378","message":"sumBefore i=0, n=2, sum=0\n","breakpointId":"bp#2","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":23},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158863,"timestampIso":"2026-11-11T06:55:58.863Z","sessionId":"378","message":"sumBefore i=1, n=2, sum=2\n","breakpointId":"bp#2","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":23},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158863,"timestampIso":"2026-11-11T06:55:58.863Z","sessionId":"378","message":"sumBefore i=2, n=2, sum=5\n","breakpointId":"bp#2","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":23},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158875,"timestampIso":"2026-11-11T06:55:58.875Z","sessionId":"378","message":"sumAfter i=0, n=2, sum=0\n","breakpointId":"bp#3","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":32},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158875,"timestampIso":"2026-11-11T06:55:58.875Z","sessionId":"378","message":"sumAfter i=1, n=2, sum=2\n","breakpointId":"bp#3","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":32},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158876,"timestampIso":"2026-11-11T06:55:58.876Z","sessionId":"378","message":"sumAfter return=5\n","breakpointId":"bp#4","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":34},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158879,"timestampIso":"2026-11-11T06:55:58.879Z","sessionId":"378","message":"countAfter i=0, n=3, count=0\n","breakpointId":"bp#5","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":50},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158879,"timestampIso":"2026-11-11T06:55:58.879Z","sessionId":"378","message":"countAfter i=1, n=3, count=1\n","breakpointId":"bp#5","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":50},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158879,"timestampIso":"2026-11-11T06:55:58.879Z","sessionId":"378","message":"countAfter i=2, n=3, count=2\n","breakpointId":"bp#5","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":50},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158880,"timestampIso":"2026-11-11T06:55:58.880Z","sessionId":"378","message":"countAfter exit i=3, count=3\n","breakpointId":"bp#6","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":53},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158885,"timestampIso":"2026-11-11T06:55:58.885Z","sessionId":"378","message":"averageBefore value=2, sum=2, count(before++)=0\n","breakpointId":"bp#7","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":61},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158885,"timestampIso":"2026-11-11T06:55:58.885Z","sessionId":"378","message":"averageBefore value=3, sum=5, count(before++)=1\n","breakpointId":"bp#7","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":61},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158886,"timestampIso":"2026-11-11T06:55:58.886Z","sessionId":"378","message":"averageBefore sum=5, count=2, average=2.0\n","breakpointId":"bp#8","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":67},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158888,"timestampIso":"2026-11-11T06:55:58.888Z","sessionId":"378","message":"averageAfter value=2, sum=2, count(before++)=0\n","breakpointId":"bp#9","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":75},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158889,"timestampIso":"2026-11-11T06:55:58.889Z","sessionId":"378","message":"averageAfter value=3, sum=5, count(before++)=1\n","breakpointId":"bp#9","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":75},{"type":"TRACEPOINT_OUTPUT","timestampMs":1794380158889,"timestampIso":"2026-11-11T06:55:58.889Z","sessionId":"378","message":"averageAfter sum=5, count=2, average=2.5\n","breakpointId":"bp#10","filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":81}]}
+```
+
+## Stack vòng lặp sai — session 392
+
+```text
+{"frames":[{"presentation":"countBefore:41, LoopBugExamples (week3.friday)","index":0,"file":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":41,"isCurrent":true},{"presentation":"main:6, MissingIncrementBefore (week3.friday)","index":1,"file":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/MissingIncrementBefore.java","line":6,"isCurrent":false}],"threadId":"\"main\"@1 in group \"main\": RUNNING","totalFrames":2}
+```
+
+## Breakpoint lần 1
+
+```text
+├─ n = 3
+├─ i = 0
+└─ count = 0
+
+```
+
+## Resume → breakpoint lần 2
+
+```text
+{"status":"paused","sessionId":"392","newPosition":{"filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":41},"frameValues":"├─ n = 3\n├─ i = 0\n└─ count = 1\n","breakpointErrorsTail":[]}
+```
+
+## Resume → breakpoint lần 3
+
+```text
+{"status":"paused","sessionId":"392","newPosition":{"filePath":"file:///Users/quangminh/Documents/Backend/Java/JavaRoadmap/month1_introduction_problemsolving/src/main/java/week3/friday/LoopBugExamples.java","line":41},"frameValues":"├─ n = 3\n├─ i = 0\n└─ count = 2\n","breakpointErrorsTail":[]}
+```
+

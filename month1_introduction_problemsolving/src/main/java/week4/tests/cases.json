@@ -1,0 +1,65 @@
+[
+  {
+    "id": "01", "name": "Số 1 không nguyên tố",
+    "input": "1 1 0\n",
+    "expected": ["1 không phải là số nguyên tố.", "Thoát chương trình."]
+  },
+  {
+    "id": "02", "name": "Số 2 nguyên tố",
+    "input": "1 2 0\n",
+    "expected": ["2 là số nguyên tố.", "Thoát chương trình."]
+  },
+  {
+    "id": "03", "name": "Số chính phương và số âm",
+    "input": "1 49 1 -7 0\n",
+    "expected": ["49 không phải là số nguyên tố.", "-7 không phải là số nguyên tố.", "Thoát chương trình."]
+  },
+  {
+    "id": "04", "name": "Đổi nhiệt độ âm, 0 và thập phân",
+    "input": "2 -40 2 0 2 37.5 0\n",
+    "expected": ["-40.00°C = -40.00°F", "0.00°C = 32.00°F", "37.50°C = 99.50°F", "Thoát chương trình."]
+  },
+  {
+    "id": "05", "name": "Bốn phép toán liên tiếp",
+    "input": "3 7 + 2 3 7 - 2 3 -3 * 2 3 7 / 2 0\n",
+    "expected": ["7.00 + 2.00 = 9.00", "7.00 - 2.00 = 5.00", "-3.00 * 2.00 = -6.00", "7.00 / 2.00 = 3.50", "Thoát chương trình."]
+  },
+  {
+    "id": "06", "name": "Chia 0 và -0 rồi tiếp tục dùng menu",
+    "input": "3 5 / 0 3 5 / -0.0 2 100 0\n",
+    "expected": ["Không thể chia cho 0.", "Không thể chia cho 0.", "100.00°C = 212.00°F", "Thoát chương trình."],
+    "absent": ["Infinity", "NaN"]
+  },
+  {
+    "id": "07", "name": "Menu sai: ngoài miền, chữ, số thực, tràn int",
+    "input": "9 -2 abc 2.5 2147483648 0\n",
+    "expected": ["Lựa chọn không hợp lệ.", "Lựa chọn không hợp lệ.", "Phải nhập số nguyên; bỏ qua: abc", "Phải nhập số nguyên; bỏ qua: 2.5", "Phải nhập số nguyên; bỏ qua: 2147483648", "Thoát chương trình."]
+  },
+  {
+    "id": "08", "name": "Chữ thay số ở mọi chức năng và phép toán sai",
+    "input": "1 abc 17 2 hot NaN Infinity 0 3 a 8 % + b 2 4 score 8 -1 0\n",
+    "expected": ["Phải nhập số nguyên; bỏ qua: abc", "17 là số nguyên tố.", "Phải nhập số; bỏ qua: hot", "Phải nhập số hữu hạn.", "Phải nhập số hữu hạn.", "0.00°C = 32.00°F", "Phải nhập số; bỏ qua: a", "Phép toán không hợp lệ.", "Phải nhập số; bỏ qua: b", "8.00 + 2.00 = 10.00", "Phải nhập số; bỏ qua: score", "Số điểm: 1; trung bình: 8.00; thấp nhất: 8.00; cao nhất: 8.00", "Thoát chương trình."]
+  },
+  {
+    "id": "09", "name": "Danh sách điểm rỗng",
+    "input": "4\n\n-1\n0\n",
+    "expected": ["Chưa có điểm; không thể tính trung bình.", "Thoát chương trình."],
+    "absent": ["Số điểm:", "NaN", "Infinity"]
+  },
+  {
+    "id": "10", "name": "Điểm biên, thập phân và ngoài miền",
+    "input": "4 -2 11 0 10 7.5 -1 0\n",
+    "expected": ["Điểm phải nằm trong [0, 10]", "Điểm phải nằm trong [0, 10]", "Số điểm: 3; trung bình: 5.83; thấp nhất: 0.00; cao nhất: 10.00", "Thoát chương trình."]
+  },
+  {
+    "id": "11", "name": "Hết dữ liệu giữa phép tính",
+    "input": "3 8 /\n",
+    "expected": ["Hết dữ liệu nhập."],
+    "absent": ["8.00 /", "Thoát chương trình."]
+  },
+  {
+    "id": "12", "name": "Dùng cả 4 chức năng rồi mở lại thống kê điểm",
+    "input": "1 17 2 25 3 9 / 3 4 6 8 -1 1 9 4 -1 0\n",
+    "expected": ["17 là số nguyên tố.", "25.00°C = 77.00°F", "9.00 / 3.00 = 3.00", "Số điểm: 2; trung bình: 7.00; thấp nhất: 6.00; cao nhất: 8.00", "9 không phải là số nguyên tố.", "Chưa có điểm; không thể tính trung bình.", "Thoát chương trình."]
+  }
+]

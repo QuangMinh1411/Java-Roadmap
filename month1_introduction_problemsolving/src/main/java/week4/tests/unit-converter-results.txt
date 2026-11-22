@@ -1,0 +1,8 @@
+0 cm -> m | expected=0.0 | actual=0.0
+125 cm -> m | expected=1.25 | actual=1.25
+0 m -> cm | expected=0.0 | actual=0.0
+1.25 m -> cm | expected=125.0 | actual=125.0
+0 g -> kg | expected=0.0 | actual=0.0
+2500 g -> kg | expected=2.5 | actual=2.5
+0 kg -> g | expected=0.0 | actual=0.0
+2.5 kg -> g | expected=2500.0 | actual=2500.0

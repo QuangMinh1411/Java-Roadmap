@@ -1,0 +1,18 @@
+PASS 01: tổng=-1, thành viên=false -> từ chối tiền âm
+PASS 02: tổng=-1, thành viên=true -> từ chối tiền âm
+PASS 03: tổng=0, thành viên=false -> 0 đồng
+PASS 04: tổng=0, thành viên=true -> 0 đồng
+PASS 05: tổng=999999, thành viên=false -> 999999 đồng
+PASS 06: tổng=999999, thành viên=true -> 949999 đồng
+PASS 07: tổng=1000000, thành viên=false -> 900000 đồng
+PASS 08: tổng=1000000, thành viên=true -> 855000 đồng
+PASS 09: tổng=1000001, thành viên=false -> 900001 đồng
+PASS 10: tổng=1000001, thành viên=true -> 855001 đồng
+10/10 PASS (hàm tính toán và nhập/xuất).
+PASS đầu vào sai/thiếu không in hóa đơn: -1 true
+PASS đầu vào sai/thiếu không in hóa đơn: abc false
+PASS đầu vào sai/thiếu không in hóa đơn: 1.5 true
+PASS đầu vào sai/thiếu không in hóa đơn: 2147483648 false
+PASS đầu vào sai/thiếu không in hóa đơn: 1000000
+PASS đầu vào sai/thiếu không in hóa đơn: 1000000 invalid
+PASS nhập lại: chỉ in hóa đơn 855000 đồng sau khi có dữ liệu đúng.
