@@ -119,8 +119,8 @@ flowchart TD
     end
 
     ref --> root
-    root -->|b[0]| row0
-    root -->|b[1]| row1
+    root -->|"b[0]"| row0
+    root -->|"b[1]"| row1
 ```
 
 ---
@@ -130,12 +130,12 @@ Minh họa khối `try...catch` khi gặp chỉ số vượt biên trong Fig. 6.
 
 ```mermaid
 flowchart TD
-    Start([Truy xuất phần tử: responses[answer]]) --> CheckBound{Chỉ số có nằm trong<br/>[0..length-1]?}
-    CheckBound -- Hợp lệ --> Execute[++frequency[value]] --> NormalNext([Tiếp tục vòng lặp])
-    CheckBound -- Vượt biên --> ThrowEx[JVM ném: ArrayIndexOutOfBoundsException]
-    ThrowEx --> EnterCatch[Nhảy vào khối catch]
-    EnterCatch --> PrintErr[In thông báo lỗi: e.toString]
-    PrintErr --> ResumeNext([Không làm sập ứng dụng - Tiếp tục bước lặp sau])
+    Start(["Truy xuất phần tử: responses[answer]"]) --> CheckBound{"Chỉ số có nằm trong<br/>[0..length-1]?"}
+    CheckBound -->|"Hợp lệ"| Execute["++frequency[value]"] --> NormalNext(["Tiếp tục vòng lặp"])
+    CheckBound -->|"Vượt biên"| ThrowEx["JVM ném: ArrayIndexOutOfBoundsException"]
+    ThrowEx --> EnterCatch["Nhảy vào khối catch"]
+    EnterCatch --> PrintErr["In thông báo lỗi: e.toString"]
+    PrintErr --> ResumeNext(["Không làm sập ứng dụng - Tiếp tục bước lặp sau"])
 ```
 
 ---
