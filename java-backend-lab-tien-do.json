@@ -33,6 +33,21 @@
     },
     "W05-D1": {
       "status": "done"
+    },
+    "W05-D2-A": {
+      "status": "done"
+    },
+    "W05-D2-B": {
+      "status": "done"
+    },
+    "W05-D2": {
+      "status": "done"
+    },
+    "W05-R01": {
+      "status": "done"
+    },
+    "W05-R02": {
+      "status": "done"
     }
   }
 }
