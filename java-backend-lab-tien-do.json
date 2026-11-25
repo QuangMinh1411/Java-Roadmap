@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "entries": {
+    "W01-D6-A": {
+      "status": "done"
+    },
+    "W01-D6-B": {
+      "status": "done"
+    },
+    "W02-D6-A": {
+      "status": "done"
+    },
+    "W02-D6-B": {
+      "status": "done"
+    },
+    "W03-D6-A": {
+      "status": "done"
+    },
+    "W03-D6-B": {
+      "status": "done"
+    },
+    "W04-D6-A": {
+      "status": "done"
+    },
+    "W04-D6-B": {
+      "status": "done"
+    },
+    "W05-D1-A": {
+      "status": "done"
+    },
+    "W05-D1-B": {
+      "status": "done"
+    },
+    "W05-D1": {
+      "status": "done"
+    }
+  }
+}

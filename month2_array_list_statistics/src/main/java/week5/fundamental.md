@@ -80,6 +80,172 @@ Trình biên dịch Java xử lý các chuỗi thoát Unicode (`\uXXXX`) theo qu
 
 ---
 
+### 3.6. Thực hành thứ Ba: trung bình bằng `double` và cập nhật mảng primitive (`[Kiến thức bổ sung]`)
+
+Mã chạy: [GradeAverageDemo.java](tuesday/GradeAverageDemo.java) và [IncrementGradesDemo.java](tuesday/IncrementGradesDemo.java). Các ví dụ dùng mảng cố định, không rỗng `int[] grades = {2, 3, 5};`.
+
+**Hai cách tính trung bình:**
+
+```java
+// Cách 1: cộng bằng int theo index, ép kiểu trước phép chia.
+int sum = 0;
+for (int i = 0; i < grades.length; i++) {
+    sum += grades[i];
+}
+double averageByIndex = (double) sum / grades.length;
+
+// Cách 2: cộng bằng double với enhanced-for.
+double doubleSum = 0.0;
+for (int grade : grades) {
+    doubleSum += grade;
+}
+double averageByForEach = doubleSum / grades.length;
+```
+
+Cả hai cho `10.0 / 3 = 3.3333333333333335`, giá trị `double` xấp xỉ của phân số `10/3`. Nếu viết `double average = sum / grades.length;`, phép chia hai `int` cho `3` trước rồi mới chuyển thành `3.0`. Viết `(double) (sum / grades.length)` cũng đã quá muộn.
+
+**Gán vào biến enhanced-for và cập nhật bằng index:**
+
+```java
+for (int grade : grades) {
+    grade = grade + 1; // Chỉ sửa bản sao giá trị int.
+}
+System.out.println(Arrays.toString(grades)); // [2, 3, 5]
+
+for (int i = 0; i < grades.length; i++) {
+    grades[i] = grades[i] + 1; // Ghi trực tiếp vào ô mảng.
+}
+System.out.println(Arrays.toString(grades)); // [3, 4, 6]
+```
+
+Đoạn in mảng cần `import java.util.Arrays;`. Mỗi lượt enhanced-for có thể hiểu là lấy `int grade = grades[i]`: `grade` là biến cục bộ chứa bản sao giá trị, không phải bí danh của ô mảng. Sau phép gán, biến lần lượt có giá trị `3`, `4`, `6`, nhưng mảng vẫn là `[2, 3, 5]`. Trong chương trình minh họa, `Arrays.equals(grades, before)` xác nhận mảng không đổi; sau vòng lặp index, `Arrays.equals(grades, new int[]{3, 4, 6})` xác nhận kết quả mong đợi. Cả hai kiểm tra đều in `true`.
+
+Chạy từ thư mục gốc dự án (Java hỗ trợ chạy trực tiếp tệp nguồn):
+
+```shell
+java month2_array_list_statistics/src/main/java/week5/tuesday/GradeAverageDemo.java
+java month2_array_list_statistics/src/main/java/week5/tuesday/IncrementGradesDemo.java
+```
+
+---
+
+### 3.7. Đếm điểm dưới trung bình bằng hai lượt duyệt (`[Kiến thức bổ sung]`)
+
+Mã chạy: [CountBelowAverageDemo.java](tuesday/CountBelowAverageDemo.java), dùng mảng không rỗng `int[] grades = {2, 3, 7};`.
+
+1. Lượt đầu cộng các điểm bằng `double`: `sum = 12.0`, sau đó tính `average = sum / grades.length = 4.0`.
+2. Lượt sau kiểm tra `grade < average`: `2` và `3` thỏa mãn, `7` không thỏa mãn, nên `count = 2`. Điểm bằng trung bình không được tính.
+
+Hai vòng lặp chỉ đọc phần tử, không gán vào `grades[i]`, không sắp xếp mảng. Chương trình chụp bản sao bằng `clone()` trước khi tính và kiểm tra bằng `Arrays.equals(grades, before)` sau khi tính: kết quả `true`, mảng vẫn là `[2, 3, 7]`. Thuật toán tính và đếm có thời gian `O(n)`, bộ nhớ phụ `O(1)`; bản sao `O(n)` chỉ phục vụ kiểm tra mảng không đổi.
+
+Chạy từ thư mục gốc dự án:
+
+```shell
+java month2_array_list_statistics/src/main/java/week5/tuesday/CountBelowAverageDemo.java
+```
+
+Kết quả:
+
+```text
+Điểm: [2, 3, 7]
+Trung bình: 4.0
+Số điểm dưới trung bình: 2
+Mảng đầu vào không đổi: true
+```
+
+---
+
+### 3.8. Thực hành thứ Tư: reference và sao chép mảng (`[Kiến thức bổ sung]`)
+
+Mã chạy: [ArrayReferenceCopyDemo.java](wednesday/ArrayReferenceCopyDemo.java).
+
+```java
+int[] a = {1, 2, 3};
+int[] b = a;
+int[] c = Arrays.copyOf(a, a.length);
+
+b[0] = 99; // a và b cùng thành [99, 2, 3]; c vẫn [1, 2, 3].
+c[1] = 88; // c thành [1, 88, 3]; a và b vẫn [99, 2, 3].
+```
+
+Cần `import java.util.Arrays;`. Biến mảng giữ reference (tham chiếu) đến đối tượng mảng. Phép gán `b = a` sao chép reference nên `a` và `b` cùng truy cập một vùng mảng. `Arrays.copyOf(a, a.length)` tạo vùng mảng mới và sao chép các giá trị `int`; sửa phần tử của một mảng không ảnh hưởng mảng kia.
+
+| Thời điểm | `a` | `b` | `c` |
+| :--- | :--- | :--- | :--- |
+| Sau khởi tạo | `[1, 2, 3]` | `[1, 2, 3]` | `[1, 2, 3]` |
+| Sau `b[0] = 99` | `[99, 2, 3]` | `[99, 2, 3]` | `[1, 2, 3]` |
+| Sau `c[1] = 88` | `[99, 2, 3]` | `[99, 2, 3]` | `[1, 88, 3]` |
+
+**Ba reference và hai vùng mảng sau cả hai phép sửa:**
+
+```mermaid
+flowchart LR
+    subgraph refs["Ba biến reference"]
+        a["a"]
+        b["b"]
+        c["c"]
+    end
+    subgraph arrays["Hai đối tượng mảng int[]"]
+        original["Mảng 1: [99, 2, 3]"]
+        copied["Mảng 2: [1, 88, 3]"]
+    end
+    a --> original
+    b --> original
+    c --> copied
+```
+
+Ngay sau khởi tạo, `a == b` là `true`, `a == c` là `false`, nhưng `Arrays.equals(a, c)` là `true`. Toán tử `==` so sánh reference, còn `Arrays.equals` so sánh nội dung các phần tử. Sau khi sửa `b[0]`, nội dung `a` và `c` khác nhau.
+
+Chạy từ thư mục gốc dự án để xem ba trạng thái:
+
+```shell
+java month2_array_list_statistics/src/main/java/week5/wednesday/ArrayReferenceCopyDemo.java
+```
+
+---
+
+### 3.9. Tổng cột và chính sách ma trận chữ nhật (`[Kiến thức bổ sung]`)
+
+Mã chạy: [ColumnSumDemo.java](wednesday/ColumnSumDemo.java), phương thức `sumColumns(int[][] matrix)`.
+
+Với `{{1, 2}, {3, 4}}`, tổng cột 0 là `1 + 3 = 4`, tổng cột 1 là `2 + 4 = 6`, nên kết quả là `[4, 6]`.
+
+Java cho phép mỗi dòng của `int[][]` có độ dài khác nhau. Ví dụ này áp dụng chính sách **chỉ nhận ma trận chữ nhật**:
+
+- Mọi dòng phải khác `null` và có cùng số cột với dòng đầu. Kiểm tra tất cả các dòng trước khi cộng.
+- Nếu thêm dòng rỗng vào ma trận hai cột (`{{1, 2}, {3, 4}, {}}`), ném `IllegalArgumentException` vì dòng 2 có 0 cột thay vì 2. Không bỏ qua dòng, không tự điền số 0 cho ô thiếu.
+- Ma trận không có dòng (`new int[][]{}`) trả về `[]`. Nếu tất cả các dòng đều rỗng (`{{}, {}}`), ma trận có 0 cột và trả về `[]`. Dòng đầu rỗng nhưng dòng sau có phần tử vẫn bị từ chối.
+- Ma trận `null` hoặc có dòng `null` bị từ chối bằng `IllegalArgumentException`.
+
+Sau bước kiểm tra, tạo `int[] sums = new int[columns]` rồi duyệt hai vòng lặp lồng nhau:
+
+```java
+for (int row = 0; row < matrix.length; row++) {
+    for (int column = 0; column < columns; column++) {
+        sums[column] += matrix[row][column];
+    }
+}
+```
+
+Chỉ ghi vào mảng kết quả mới, không sửa ma trận đầu vào. Với `r` dòng và `c` cột, thời gian là `O(r + r*c)`, bộ nhớ cho kết quả là `O(c)`.
+
+Chạy từ thư mục gốc dự án:
+
+```shell
+java month2_array_list_statistics/src/main/java/week5/wednesday/ColumnSumDemo.java
+```
+
+Kết quả:
+
+```text
+[[1, 2], [3, 4]] → [4, 6]
+[[1, 2], [3, 4], []] → Từ chối: Ma trận không chữ nhật: dòng 2 có 0 cột, cần 2.
+[[], []] → []
+[] → []
+```
+
+---
+
 ## 4. Thuật toán, Kiến trúc, Bảng và Sơ đồ quan trọng
 
 ### 4.1. Các bảng thông số kỹ thuật chuẩn trong Java
@@ -429,6 +595,102 @@ void main() {
   2. Sử dụng `Arrays.sort()` để sắp xếp các khoản giao dịch theo thứ tự tăng dần.
   3. Sao chép 3 khoản giao dịch lớn nhất sang một mảng mới bằng `Arrays.copyOfRange()`.
   4. Tính tổng giá trị của 3 khoản giao dịch lớn nhất này với độ chính xác tuyệt đối bằng `BigDecimal.add()`.
+
+---
+
+### Bài ôn 1: Histogram điểm và kiểm tra mốc biên (`[Kiến thức bổ sung]`)
+
+Mã chạy: [GradeHistogramDemo.java](GradeHistogramDemo.java).
+
+Phân loại điểm vào bốn khoảng sau. Dấu `[` hoặc `]` bao gồm mốc, dấu `)` loại trừ mốc phải.
+
+| Chỉ số cột | Khoảng điểm | Điểm mẫu thuộc cột | Số lượng |
+| :--- | :--- | :--- | :--- |
+| 0 | `[0,5)` | `0`, `4.9` | 2 |
+| 1 | `[5,6.5)` | `5` | 1 |
+| 2 | `[6.5,8)` | `6.5` | 1 |
+| 3 | `[8,10]` | `8`, `10` | 2 |
+
+**Chính sách từ chối:** Điểm ngoài `[0,10]` (như `-1`, `11`), `NaN` và vô cực bị từ chối bằng `IllegalArgumentException` trong `bucketIndex`. Vòng lặp bắt lỗi từng điểm, báo giá trị bị từ chối rồi bỏ qua để tiếp tục tính các điểm hợp lệ. Không ép điểm sai vào cột đầu/cuối, không sửa mảng đầu vào.
+
+Sau khi kiểm tra tính hợp lệ, chuỗi `if / else if / else` dùng các mốc `< 5`, `< 6.5`, `< 8`, còn lại vào cột cuối. Vì chỉ chọn một nhánh, mỗi điểm hợp lệ tăng đúng một cột và tăng `validCount` một lần. Do đó, sau mỗi lượt duyệt:
+
+```text
+counts[0] + counts[1] + counts[2] + counts[3] == validCount
+```
+
+Với `[0,4.9,5,6.5,8,10]`, histogram là `[2,1,1,2]`, tổng là `6`. Chương trình thêm `-1` và `11` vào dữ liệu để minh họa từ chối: vẫn có `6` điểm hợp lệ, `2` điểm bị từ chối và histogram không đổi. Mảng rỗng hoặc toàn điểm sai có bốn cột bằng `0`. Thời gian `O(n)`, bộ nhớ phụ `O(1)` vì luôn có bốn cột.
+
+Chạy từ thư mục gốc dự án:
+
+```shell
+java month2_array_list_statistics/src/main/java/week5/GradeHistogramDemo.java
+```
+
+Các dòng kết quả chính:
+
+```text
+Histogram: [2, 1, 1, 2]
+Số điểm hợp lệ: 6
+Số điểm bị từ chối: 2
+Tổng các cột: 6
+Tổng các cột bằng số điểm hợp lệ: true
+```
+
+---
+
+### Bài ôn 2: Đối chiếu thống kê giữa mảng và `ArrayList` (`[Kiến thức bổ sung]`)
+
+Mã chạy: [GradeStatisticsComparisonDemo.java](GradeStatisticsComparisonDemo.java). Bộ 10 ca đối chiếu: [GradeStatisticsComparisonTest.java](tests/GradeStatisticsComparisonTest.java).
+
+Tạo một bộ 20 điểm cố định rồi thêm từng giá trị vào `ArrayList<Double>`, đảm bảo hai bản có cùng giá trị và thứ tự:
+
+```text
+[0, 1, 2, 3, 4, 4.9, 5, 5.5, 6, 6.4, 6.5, 7, 7.5, 7.9, 8, 8.5, 9, 9.5, 10, 10]
+```
+
+Hai phương thức `analyze(double[])` và `analyze(ArrayList<Double>)` duyệt trực tiếp cấu trúc tương ứng để tính min, max, tổng và histogram; trung bình bằng tổng chia số điểm hợp lệ. Bản mảng dùng index và `length`, bản danh sách dùng enhanced-for và unboxing `Double`. Cả hai dùng quy tắc khoảng của Bài ôn 1 qua `GradeHistogramDemo.bucketIndex`, không sửa dữ liệu đầu vào và tạo kết quả mới mỗi lần gọi.
+
+**Quy ước:** Điểm hữu hạn thuộc `[0,10]` là hợp lệ; điểm sai bị bỏ qua và tăng `rejectedCount`. Nếu không có điểm hợp lệ, min/max/average là `Double.NaN`, histogram là `[0,0,0,0]`; không chia cho 0. Container `null` bị từ chối bằng `NullPointerException`; phần tử `null` trong danh sách được tính là một điểm bị từ chối.
+
+**10 ca đối chiếu đã chạy đạt:** Mỗi hàng là kết quả kỳ vọng chung cho cả mảng và danh sách. Histogram theo thứ tự `[0,5)`, `[5,6.5)`, `[6.5,8)`, `[8,10]`; các trung bình dài được ghi xấp xỉ.
+
+| Ca | Dữ liệu / thao tác | Hợp lệ / từ chối | Min | Max | Average | Histogram |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 01 | 20 điểm ở trên | 20 / 0 | 0 | 10 | 6.085 | `[6,4,4,6]` |
+| 02 | Rỗng | 0 / 0 | NaN | NaN | NaN | `[0,0,0,0]` |
+| 03 | `[0]` | 1 / 0 | 0 | 0 | 0 | `[1,0,0,0]` |
+| 04 | `[10]` | 1 / 0 | 10 | 10 | 10 | `[0,0,0,1]` |
+| 05 | 20 điểm đều bằng 7 | 20 / 0 | 7 | 7 | 7 | `[0,0,20,0]` |
+| 06 | `[0,4.9,5,6.5,8,10]` | 6 / 0 | 0 | 10 | 5.7333333333 | `[2,1,1,2]` |
+| 07 | `[-1,0,5,10,11]` | 3 / 2 | 0 | 10 | 5 | `[1,1,0,1]` |
+| 08 | `[-1,11,NaN,-Infinity,+Infinity]` | 0 / 5 | NaN | NaN | NaN | `[0,0,0,0]` |
+| 09 | Từ ca 01, thêm điểm 10 rồi tính lại | 21 / 0 | 0 | 10 | 6.2714285714 | `[6,4,4,7]` |
+| 10 | Từ ca 09, xóa index 0 (điểm 0) rồi tính lại | 20 / 0 | 1 | 10 | 6.585 | `[5,4,4,7]` |
+
+Thêm vào bản mảng cần `Arrays.copyOf` để tăng độ dài rồi gán phần tử cuối; danh sách dùng `add(10.0)`. Xóa phần tử đầu ở bản mảng dùng `Arrays.copyOfRange`; danh sách dùng `remove(0)` (xóa theo index). Sau mỗi thao tác, gọi lại cả hai phương thức thống kê.
+
+Mỗi ca kiểm tra cả hai bản với kết quả kỳ vọng độc lập, rồi đối chiếu trực tiếp hai bản. Số lượng và histogram phải khớp chính xác; số thực dùng sai số tuyệt đối `1e-9`, xử lý riêng `NaN`. Hai bất biến được kiểm tra cho từng bản:
+
+```text
+tổng histogram == validCount
+validCount + rejectedCount == số phần tử đầu vào
+```
+
+Bộ đối chiếu còn chụp đầu vào trước mỗi lần tính để kiểm tra dữ liệu không bị sửa. Nếu sai, chương trình ném `AssertionError` và thoát với mã lỗi; không cần bật `-ea`.
+
+Biên dịch và chạy từ thư mục gốc dự án (JDK 25, không cần thư viện test):
+
+```shell
+javac -encoding UTF-8 -d month2_array_list_statistics/target/review-classes \
+  month2_array_list_statistics/src/main/java/week5/GradeHistogramDemo.java \
+  month2_array_list_statistics/src/main/java/week5/GradeStatisticsComparisonDemo.java \
+  month2_array_list_statistics/src/main/java/week5/tests/GradeStatisticsComparisonTest.java
+java -cp month2_array_list_statistics/target/review-classes week5.GradeStatisticsComparisonDemo
+java -cp month2_array_list_statistics/target/review-classes week5.tests.GradeStatisticsComparisonTest
+```
+
+Dòng kết quả cuối: `Đạt 10/10 ca đối chiếu.`
 
 ---
 
