@@ -2,17 +2,22 @@ package week5.wednesday;
 
 import java.util.Arrays;
 
-/** Tính tổng từng cột sau khi kiểm tra tất cả các dòng có cùng độ dài. */
+/**
+ * Tính tổng từng cột sau khi kiểm tra tất cả các dòng có cùng độ dài.
+ * Từ chối ma trận không chữ nhật: không bỏ qua dòng rỗng, không tự điền ô thiếu.
+ */
 public class ColumnSumDemo {
     public static void main(String[] args) {
         printColumnSums(new int[][]{{1, 2}, {3, 4}});
         printColumnSums(new int[][]{{1, 2}, {3, 4}, {}});
+        printColumnSums(new int[][]{{}, {3, 4}});
         printColumnSums(new int[][]{{}, {}});
         printColumnSums(new int[][]{});
     }
 
     /**
      * Không sửa mảng đầu vào. Mảng không có dòng hoặc có 0 cột cho kết quả [].
+     * Dòng rỗng chỉ hợp lệ khi tất cả các dòng đều rỗng (ma trận 0 cột).
      * @throws IllegalArgumentException nếu mảng/dòng null hoặc các dòng khác độ dài
      */
     public static int[] sumColumns(int[][] matrix) {

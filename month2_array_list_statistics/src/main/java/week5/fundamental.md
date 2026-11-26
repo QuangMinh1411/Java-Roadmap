@@ -240,6 +240,7 @@ Kết quả:
 ```text
 [[1, 2], [3, 4]] → [4, 6]
 [[1, 2], [3, 4], []] → Từ chối: Ma trận không chữ nhật: dòng 2 có 0 cột, cần 2.
+[[], [3, 4]] → Từ chối: Ma trận không chữ nhật: dòng 1 có 2 cột, cần 0.
 [[], []] → []
 [] → []
 ```
